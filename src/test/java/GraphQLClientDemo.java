@@ -11,7 +11,7 @@ public class GraphQLClientDemo {
         GraphQlClient client = HttpGraphQlClient.builder(wc).build();
         //验证测试，$id参数名必须和id一致，否则报错。
         String body = "query ($id:ID!) {\n" +
-                "        bookById(id:$id) {\n" +
+                "        findBookById(id:$id) {\n" +
                 "            id\n" +
                 "            name\n" +
                 "            pageCount\n" +
@@ -24,7 +24,7 @@ public class GraphQLClientDemo {
                 "    }";
         Book book = client.document(body)
                 .variable("id", "book-1")
-                .retrieve("bookById")
+                .retrieve("findBookById")
                 .toEntity(Book.class)
                 .block();
         System.out.println(book.getName());
